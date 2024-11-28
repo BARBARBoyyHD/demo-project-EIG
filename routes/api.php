@@ -23,7 +23,11 @@ Route::get('/projects/{id}', [ProjectController::class, 'show']);
 Route::patch('/projects/{id}', [ProjectController::class, 'update'])->name("projects.update");
 
 // Delete a project
+
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name("projects.destroy");
+
+
+Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name("projects.destroy");
 
 
 
