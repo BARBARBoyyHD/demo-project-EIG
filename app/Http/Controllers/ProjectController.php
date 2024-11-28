@@ -17,6 +17,11 @@ class ProjectController extends Controller
     public function create(){
         return view("project.create");
     }
+    public function show(Request $request,$id){
+       $project = new Project();
+       $project = Project::find($id);
+       return response()->json($project);
+    }
 
     public function store(Request $request){
     
@@ -45,11 +50,23 @@ class ProjectController extends Controller
         return response()->json('success');
     }
 
-    public function delete(Request $request, Project $project){
+    public function delete($id)
+    {
+        // Find the project by ID
+        $project = Project::find($id);
+    
+        // Check if the project exists
+        if (!$project) {
+            return response()->json(['message' => 'Project not found'], 404);
+        }
+    
+        // Delete the project
         $project->delete();
-        
-        return redirect()->route('proj.index');
+    
+        // Return success response
+        return response()->json(['message' => 'Project deleted successfully']);
     }
+    
 
 
 }
